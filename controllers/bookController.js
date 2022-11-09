@@ -6,23 +6,32 @@ const BookInstance = require("../models/bookinstance");
 const async = require("async");
 
 exports.index = (req, res) => {
-  async.parallel({
-    book_count(callback) {
-      Book.countDocuments({}, callback);
+  async.parallel(
+    {
+      book_count(callback) {
+        Book.countDocuments({}, callback);
+      },
+      book_instance_count(callback) {
+        BookInstance.countDocuments({}, callback);
+      },
+      book_instance_available_count(callback) {
+        BookInstance.countDocuments({ status: "Available" }, callback);
+      },
+      author_count(callback) {
+        Author.countDocuments({}, callback);
+      },
+      genre_count(callback) {
+        Genre.countDocuments({}, callback);
+      },
     },
-    book_instance_count(callback) {
-      BookInstance.countDocuments({}, callback);
-    },
-    book_instance_available_count(callback) {
-      BookInstance.countDocuments({ status: "Available" }, callback);
-    },
-    author_count(callback) {
-      Author.countDocuments({}, callback);
-    },
-    genre_count(callback) {
-      Genre.countDocuments({}, callback);
-    },
-  });
+    (err, result) => {
+      res.render("index", {
+        title: "Local Library Home",
+        error: err,
+        data: result,
+      });
+    }
+  );
 };
 
 // Display list of all books.
