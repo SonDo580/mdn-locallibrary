@@ -20,7 +20,11 @@ exports.bookinstance_list = (req, res, next) => {
 
 // Display detail page for a specific BookInstance.
 exports.bookinstance_detail = (req, res) => {
-  res.send(`NOT IMPLEMENTED: BookInstance detail: ${req.params.id}`);
+  async.parallel({
+    bookinstance(callback) {
+      BookInstance.findById(req.params.id).populate(book).exec(callback);
+    },
+  });
 };
 
 // Display BookInstance create form on GET.
