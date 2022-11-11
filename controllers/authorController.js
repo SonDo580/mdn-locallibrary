@@ -43,7 +43,7 @@ exports.author_detail = (req, res, next) => {
       res.render("author_detail", {
         title: "Author Detail",
         author: results.author,
-        author_books: results.author.books,
+        author_books: results.author_books,
       });
     }
   );
