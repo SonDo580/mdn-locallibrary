@@ -1,4 +1,7 @@
 const Author = require("../models/author");
+const Book = require("../models/book");
+
+const async = require("async");
 
 // Display list of all author
 exports.author_list = (req, res, next) => {
