@@ -1,0 +1,37 @@
+extends layout 
+
+block content 
+
+    h1= title 
+
+    form(method='POST' action='')
+        div.form-group
+            label(for="firstName") First Name: 
+            input#firstName.form-control(
+                type="text"
+                placeholder="First Name"
+                name='firstName'
+                required
+                value=''
+            )
+
+            label(for='familyName') Family Name:
+            input#familyName.form-control(
+                type='text' 
+                placeholder='Family Name' 
+                name='familyName' 
+                required
+                value=''
+            )
+
+        div.form-group
+            label(for='dateOfBirth') Date of birth:
+            input#dateOfBirth.form-control(
+                type='date' 
+                name='dateOfBirth' 
+                value=''
+            )
+        
+        button.btn.btn-primary(type='submit') Submit 
+    
+    
