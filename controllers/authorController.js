@@ -103,6 +103,14 @@ exports.author_create_post = [
       date_of_birth: req.body.date_of_birth,
       date_of_death: req.body.date_of_death,
     });
+
+    author.save((err) => {
+      if (err) {
+        return next(err);
+      }
+
+      res.redirect(author.url);
+    });
   },
 ];
 
