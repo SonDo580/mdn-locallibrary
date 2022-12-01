@@ -52,7 +52,7 @@ exports.author_detail = (req, res, next) => {
 
 // Display author create form on GET
 exports.author_create_get = (req, res) => {
-  res.send("author_form", { title: "Create Author" });
+  res.render("author_form", { title: "Create Author" });
 };
 
 // Handle author create on POST
