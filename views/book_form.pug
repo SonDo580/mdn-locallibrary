@@ -21,6 +21,8 @@ block content
                 placeholder='Select author'
                 name='author'
                 required)
+                
+                - authors.sort((a, b) => {let textA = a.family_name.toUpperCase(); let textB = b.family_name.toUpperCase(); return textA < textB ? -1 : (textA > textB ? 1 : 0);});
 
         div.form-group
             label(for='summary') Summary: 
