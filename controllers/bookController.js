@@ -116,7 +116,6 @@ exports.book_create_get = (req, res, next) => {
 exports.book_create_post = [
   // Convert genres to an array
   (req, res, next) => {
-    console.log(req.body.genre);
     if (!Array.isArray(req.body.genre)) {
       req.body.genre =
         typeof req.body.genre === "undefined" ? [] : [req.body.genre];
