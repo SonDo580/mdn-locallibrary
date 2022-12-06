@@ -12,7 +12,7 @@ block content
                 placeholder='Name of book'
                 name='title'
                 required 
-                value=''
+                value=(book === undefined ? '' : book.title)
             )         
 
         div.form-group
@@ -34,8 +34,7 @@ block content
                 placeholder='Summary'
                 name='summary'
                 required 
-                value=''
-            )
+            ) #{book === undefined ? '' : book.summary}
 
         div.form-group
             label(for='isbn') ISBN: 
@@ -44,7 +43,7 @@ block content
                 placeholder='ISBN13'
                 name='isbn'
                 required 
-                value=''
+                value=(book === undefined ? '' : book.isbn)
             )   
 
         div.form-group
