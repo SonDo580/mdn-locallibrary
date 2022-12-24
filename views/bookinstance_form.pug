@@ -1,0 +1,24 @@
+extends layout 
+
+block content
+    h1= title 
+
+    form(method='POST' action='')
+        div.form-group
+            label(for='book') Book:
+            select#book.form-control(
+                type='select' 
+                placeholder='Select book' 
+                name='book' 
+                required)
+
+                - book_list.sort((a, b) => {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return textA < textB ? -1 : (textA > textB ? 1 : 0);});
+                for book in book_list
+                    option(
+                        value=book._id,
+                    ) #{book.title}
+            
+        
+
+
+             
