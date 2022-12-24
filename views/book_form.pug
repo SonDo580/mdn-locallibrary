@@ -26,7 +26,7 @@ block content
 
                 for author in authors
                     if book
-                        - let selected = author._id.toString()===book.author._id.toString() ? true : false;
+                        - let selected = (author._id.toString() === book.author._id.toString() || author._id.toString() === book.author) ? true : false;
                         option(value=author._id selected=selected) #{author.name}
                     else
                         option(value=author._id) #{author.name}
