@@ -277,4 +277,18 @@ exports.book_update_post = [
     .escape(),
   body("isbn", "ISBN must not be empty").trim().isLength({ min: 1 }).escape(),
   body("genre.*").escape(),
+
+  // Process request
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    const book = new Book({
+      title: req.body.title,
+      author: req.body.author,
+      summary: req.body.summary,
+      isbn: req.body.isbn,
+      genre: req.body.genre,
+      _id: req.params.id, // This is required (if not, a new ID will be assigned)
+    });
+  },
 ];
