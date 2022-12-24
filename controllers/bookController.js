@@ -290,5 +290,40 @@ exports.book_update_post = [
       genre: req.body.genre,
       _id: req.params.id, // This is required (if not, a new ID will be assigned)
     });
+
+    // Render the form again if there are errors
+    if (!errors.isEmpty()) {
+      async.parallel(
+        {
+          authors(callback) {
+            Author.find(callback);
+          },
+          genres(callback) {
+            Genre.find(callback);
+          },
+        },
+
+        (err, results) => {
+          if (err) {
+            return next(err);
+          }
+
+          for (const genre of results.genres) {
+            if (book.genre.includes(genre._id)) {
+              genre.checked = true;
+            }
+          }
+
+          res.render("book_form", {
+            title: "Update Book",
+            authors: results.authors,
+            genres: results.genres,
+            book,
+            errors: errors.array(),
+          });
+        }
+      );
+      return;
+    }
   },
 ];
