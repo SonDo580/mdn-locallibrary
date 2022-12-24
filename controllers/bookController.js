@@ -236,7 +236,7 @@ exports.book_update_get = (req, res, next) => {
       }
 
       // Success
-      for (const genre of results.genre) {
+      for (const genre of results.genres) {
         for (const bookGenre of results.book.genre) {
           if (genre._id.toString() === bookGenre._id.toString()) {
             genre.checked = "true";
