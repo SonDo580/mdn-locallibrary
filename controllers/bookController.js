@@ -325,5 +325,14 @@ exports.book_update_post = [
       );
       return;
     }
+
+    // Data from form is valid => Update the record
+    Book.findByIdAndUpdate(req.params.id, book, {}, (err, thebook) => {
+      if (err) {
+        return next(err);
+      }
+
+      res.redirect(thebook.url);
+    });
   },
 ];
