@@ -170,6 +170,15 @@ exports.author_delete_post = (req, res, next) => {
           author_books: results.author_books,
         });
       }
+
+      // Author has no books
+      Author.findByIdAndRemove(req.body.authorid, (err) => {
+        if (err) {
+          return next(err);
+        }
+
+        res.redirect("/catalog/authors");
+      });
     }
   );
 };
