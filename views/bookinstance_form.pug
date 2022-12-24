@@ -14,7 +14,8 @@ block content
                 - book_list.sort((a, b) => {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return textA < textB ? -1 : (textA > textB ? 1 : 0);});
                 for book in book_list
                     option(
-                        value=book._id,
+                        value=book._id
+                        selected=(selected_book===book._id.toString() ? 'selected': false)
                     ) #{book.title}
 
         div.form-group
@@ -24,7 +25,7 @@ block content
                 placeholder='Publisher and date information' 
                 name='imprint'
                 required 
-                value=''
+                value=(bookinstance===undefined ? '' : bookinstance.imprint)
             )
         
         div.form-group
@@ -32,7 +33,7 @@ block content
             input#due_back.form-control(
                 type='date'
                 name='due_back'
-                value=''
+                value=(bookinstance===undefined ? '' : bookinstance.due_back)
             ) 
 
         div.form-group
@@ -48,7 +49,8 @@ block content
                 option(value='Reserved') Reserved
         
         button.btn.btn-primary Submit
-        
-
-
-             
+    
+    if errors 
+        ul 
+            for error in errors 
+                li= error.msg         
