@@ -146,8 +146,32 @@ exports.author_delete_get = (req, res, next) => {
 };
 
 // Handle Author delete on POST.
-exports.author_delete_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: Author delete POST");
+exports.author_delete_post = (req, res, next) => {
+  async.parallel(
+    {
+      author(callback) {
+        Author.findById(req.body.authorid).exec(callback);
+      },
+      author_books(callback) {
+        Book.find({ author: req.body.authorid }).exec(callback);
+      },
+    },
+
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+
+      if (results.author_books.length > 0) {
+        // Author has books. Render the delete form again
+        res.render("author_delete", {
+          title: "Delete Author",
+          author: results.author,
+          author_books: results.author_books,
+        });
+      }
+    }
+  );
 };
 
 // Display Author update form on GET.
