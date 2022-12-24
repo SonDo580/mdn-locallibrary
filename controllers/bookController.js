@@ -255,6 +255,13 @@ exports.book_update_get = (req, res, next) => {
 };
 
 // Handle book update on POST.
-exports.book_update_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: Book update POST");
-};
+exports.book_update_post = [
+  // Convert genre to an array
+  (req, res, next) => {
+    if (!Array.isArray(req.body.genre)) {
+      req.body.genre =
+        typeof req.body.genre === undefined ? [] : [req.body.genre];
+    }
+    next();
+  },
+];
