@@ -100,6 +100,12 @@ exports.bookinstance_create_post = [
     }
 
     // Data from form is valid
+    bookinstance.save((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect(bookinstance.url);
+    });
   },
 ];
 
