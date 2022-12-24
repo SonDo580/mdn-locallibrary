@@ -67,6 +67,20 @@ exports.bookinstance_create_post = [
     .optional({ checkFalsy: true })
     .isISO8601()
     .toDate(),
+
+  // Process request
+  (req, res, next) => {
+    // Extract the validation errors
+    const errors = validationResult(req);
+
+    // Create a BookInstace object
+    const bookinstance = new BookInstance({
+      book: req.body.book,
+      imprint: req.body.imprint,
+      status: req.body.status,
+      due_back: req.body.due_back,
+    });
+  },
 ];
 
 // Display BookInstance delete form on GET.
