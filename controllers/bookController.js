@@ -168,7 +168,7 @@ exports.book_create_post = [
           // Mark selected genres as checked
           for (const genre of results.genres) {
             if (book.genre.includes(genre._id)) {
-              genre.checked = "true";
+              genre.checked = true;
             }
           }
 
@@ -239,7 +239,7 @@ exports.book_update_get = (req, res, next) => {
       for (const genre of results.genres) {
         for (const bookGenre of results.book.genre) {
           if (genre._id.toString() === bookGenre._id.toString()) {
-            genre.checked = "true";
+            genre.checked = true;
           }
         }
       }
