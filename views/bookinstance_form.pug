@@ -7,7 +7,6 @@ block content
         div.form-group
             label(for='book') Book:
             select#book.form-control(
-                type='select' 
                 placeholder='Select book' 
                 name='book' 
                 required)
@@ -17,7 +16,38 @@ block content
                     option(
                         value=book._id,
                     ) #{book.title}
-            
+
+        div.form-group
+            label(for='imprint') Imprint: 
+            input#imprint.form-control(
+                type='text'
+                placeholder='Publisher and date information' 
+                name='imprint'
+                required 
+                value=''
+            )
+        
+        div.form-group
+            label(for="due_back") Date when book available:
+            input#due_back.form-control(
+                type='date'
+                name='due_back'
+                value=''
+            ) 
+
+        div.form-group
+            label(for="status") Status: 
+            select#status.form-control(
+                placeholder='Select status'
+                name='status'
+                required
+            ) 
+                option(value='Maintenance') Maintenance
+                option(value='Available') Available
+                option(value='Loaned') Loaned
+                option(value='Reserved') Reserved
+        
+        button.btn.btn-primary Submit
         
 
 
